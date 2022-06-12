@@ -1,3 +1,3 @@
 # game-of-life
 
-### slow :)
+### wasm test
