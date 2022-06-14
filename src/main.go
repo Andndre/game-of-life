@@ -24,6 +24,7 @@ var height int
 var sizeX int = 50
 var sizeY int = 50
 
+
 func randBool() bool {
 	rand.Seed(time.Now().UnixNano())
 	return rand.Intn(2) == 1
@@ -49,7 +50,7 @@ func main() {
 			grid[i * sizeX + j] = randBool()
 		}
 	}
-	
+
 	cvs.Start(30, Render)
 
 	document := js.Global().Get("document")
@@ -69,7 +70,7 @@ func main() {
 	canvasContainer := document.Call("getElementById", "canvas-container")
 	cvs.Set(jsCanvas, width, height)
 	canvasContainer.Call("appendChild", jsCanvas)
-	
+
 	<-done
 }
 
@@ -93,7 +94,7 @@ func Render(gc *draw2dimg.GraphicContext) bool {
 			gc.Close()
 		}
 	}
-	
+
 	gc.Restore()
 
 	nextGeneration := make([]bool, sizeX * sizeY)
