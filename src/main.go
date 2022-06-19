@@ -24,7 +24,6 @@ var height int
 var sizeX int = 50
 var sizeY int = 50
 
-
 func randBool() bool {
 	rand.Seed(time.Now().UnixNano())
 	return rand.Intn(2) == 1
@@ -34,7 +33,7 @@ func gridAt(i, j int) bool {
 	if i < 0 || i >= sizeX || j < 0 || j >= sizeY {
 		return false
 	}
-	return grid[i * sizeX + j]
+	return grid[i*sizeX+j]
 }
 
 func main() {
@@ -43,11 +42,11 @@ func main() {
 	height = 600
 	width = 600
 
-	grid = make([]bool, sizeX * sizeY)
+	grid = make([]bool, sizeX*sizeY)
 
 	for i := 0; i < sizeX; i++ {
 		for j := 0; j < sizeY; j++ {
-			grid[i * sizeX + j] = randBool()
+			grid[i*sizeX+j] = randBool()
 		}
 	}
 
@@ -97,7 +96,7 @@ func Render(gc *draw2dimg.GraphicContext) bool {
 
 	gc.Restore()
 
-	nextGeneration := make([]bool, sizeX * sizeY)
+	nextGeneration := make([]bool, sizeX*sizeY)
 
 	for i := 0; i < sizeX; i++ {
 		for j := 0; j < sizeY; j++ {
@@ -112,26 +111,27 @@ func Render(gc *draw2dimg.GraphicContext) bool {
 					}
 				}
 			}
-			/*
-			https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
 
-			The rules of the game are:
-			1. Any live cell with fewer than two live neighbours dies, as if by underpopulation.
-			2. Any live cell with two or three live neighbours lives on to the next generation.
-			3. Any live cell with more than three live neighbours dies, as if by overpopulation.
-			4. Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
+			/*
+				https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
+
+				The rules of the game are:
+				1. Any live cell with fewer than two live neighbours dies, as if by underpopulation.
+				2. Any live cell with two or three live neighbours lives on to the next generation.
+				3. Any live cell with more than three live neighbours dies, as if by overpopulation.
+				4. Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
 			*/
 			if gridAt(i, j) {
 				if alive < 2 || alive > 3 {
-					nextGeneration[i * sizeX + j] = false
+					nextGeneration[i*sizeX+j] = false
 				} else {
-					nextGeneration[i * sizeX + j] = true
+					nextGeneration[i*sizeX+j] = true
 				}
 			} else {
 				if alive == 3 {
-					nextGeneration[i * sizeX + j] = true
+					nextGeneration[i*sizeX+j] = true
 				} else {
-					nextGeneration[i * sizeX + j] = false
+					nextGeneration[i*sizeX+j] = false
 				}
 			}
 		}
